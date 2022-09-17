@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { StatusBar } from 'expo-status-bar';
 import { Alert, StyleSheet, Button, Text, View } from 'react-native';
+// import { render } from 'ejs';
 
 
 const Stack = createNativeStackNavigator();
@@ -15,6 +16,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  navbar: {
+    width: "100%",
+    // top: "40%",
+    // height: 100
+    justifyContent: 'space-between',
+    flexDirection: 'column'
+  },
+  navbutton: {
+    backgroundColor: 'red',
+    color: 'red'
+  }
 
 });
 // Components
@@ -47,8 +59,8 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <Text>Home page</Text>
 
-      <View>
-        <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
+      <View style={styles.navbar}>
+        <Button styles={styles.navbutton} title="Home" onPress={() => navigation.navigate('Home')}></Button>
         <Button title="Request Services"></Button>
         <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
       </View>
@@ -63,7 +75,7 @@ const Profile = ({ navigation }) => {
       <Text>Profile</Text>
       
       {/* <NavigationBar/> */}
-      <View>
+      <View style={styles.navbar}>
         <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
         <Button title="Request Services"></Button>
         <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
