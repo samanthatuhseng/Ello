@@ -6,6 +6,10 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity, Image, Alert, StyleSheet, Button, Text, View, ScrollView } from 'react-native';
 // import { render } from 'ejs';
 
+import Login from "./components/Login"
+import Home from "./components/Home"
+import Profile from "./components/Profile"
+
 
 const Stack = createNativeStackNavigator();
 
@@ -39,67 +43,67 @@ const styles = StyleSheet.create({
 
 // Pages
 
-const Login = ({ navigation }) => {
-  {/*Button not linked yet, just takes u to home page to prove it works!*/}
-  return (
-    <View style={styles.container}>
-      <Text>Ello</Text>
-      <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button>
-      <StatusBar style="auto"/>
-    </View>
-  );
-};
+// const Login = ({ navigation }) => {
+//   {/*Button not linked yet, just takes u to home page to prove it works!*/}
+//   return (
+//     <View style={styles.container}>
+//       <Text>Ello</Text>
+//       <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button>
+//       <StatusBar style="auto"/>
+//     </View>
+//   );
+// };
 
-const Home = ({ navigation }) => {
-  return (
-    <ScrollView>
-      <ScrollView style={styles.container}>
-        <Text>Home page</Text>
+// const Home = ({ navigation }) => {
+//   return (
+//     <ScrollView>
+//       <ScrollView style={styles.container}>
+//         <Text>Home page</Text>
         
-        <StatusBar style="auto" />
-      </ScrollView>
+//         <StatusBar style="auto" />
+//       </ScrollView>
 
               
-      <View style={styles.navbar}>
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
-            <Image source={require('./assets/navicons/homeicon.png')}/>
-            <View style={styles.SeparatorLine} />
-            <Text style={styles.TextStyle}>Home</Text>
-        </TouchableOpacity>
+//       <View style={styles.navbar}>
+//         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
+//             <Image source={require('./assets/navicons/homeicon.png')}/>
+//             <View style={styles.SeparatorLine} />
+//             <Text style={styles.TextStyle}>Home</Text>
+//         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5}>
-            <Image source={require('./assets/navicons/requesticon.png')}/>
-            <View style={styles.SeparatorLine} />
-            <Text style={styles.TextStyle}>Request Services</Text>
-        </TouchableOpacity>
+//         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5}>
+//             <Image source={require('./assets/navicons/requesticon.png')}/>
+//             <View style={styles.SeparatorLine} />
+//             <Text style={styles.TextStyle}>Request Services</Text>
+//         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
-            <Image source={require('./assets/navicons/usericon.png')}/>
-            <View style={styles.SeparatorLine} />
-            <Text style={styles.TextStyle}>Profile</Text>
-        </TouchableOpacity>
+//         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
+//             <Image source={require('./assets/navicons/usericon.png')}/>
+//             <View style={styles.SeparatorLine} />
+//             <Text style={styles.TextStyle}>Profile</Text>
+//         </TouchableOpacity>
 
-      </View>
-    </ScrollView>
+//       </View>
+//     </ScrollView>
       
-  );
-};
+//   );
+// };
 
-const Profile = ({ navigation }) => {
-  return (
-    <View>
-      <Text>Profile</Text>
+// const Profile = ({ navigation }) => {
+//   return (
+//     <View>
+//       <Text>Profile</Text>
       
-      {/* <NavigationBar/> */}
-      <View style={styles.navbar}>
-        <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
-        <Button title="Request Services"></Button>
-        <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
-      </View>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+//       {/* <NavigationBar/> */}
+//       <View style={styles.navbar}>
+//         <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
+//         <Button title="Request Services"></Button>
+//         <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
+//       </View>
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
 
 const App = () => {
   return (
