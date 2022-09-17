@@ -1,18 +1,43 @@
+import * as React from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Welcome } from './assets/components/testcomponent'
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Donald Test!</Text>
-      <Welcome/>
+import { Alert, StyleSheet, Button, Text, View } from 'react-native';
 
 
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Stack = createNativeStackNavigator();
+
+// import Welcome from './assets/components/testcomponent'
+
+// SAM READ THIS: https://reactjs.org/docs/components-and-props.html
+// const Sam = () => {
+//   return (
+//     <View>
+//       <Button onPress={() => Alert.alert("I got clicked!")} title="Click me!" color="#000" accessibilityLabel="Click me to learn more about what I do!"/>
+//     </View>
+//   )
+// }
+
+// const SamPonent = () => {
+//   return (
+//     <View>
+//       <Sam/>
+//       <Sam/>
+//       <Sam/>
+//     </View>
+//   )
+// }
+
+// export default function App() {
+//   return (
+//     <View style={styles.container}>
+//       <Text>Ello</Text>
+//       {/* <SamPonent/> */}
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -22,3 +47,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+const Login = ({ navigation }) => {
+  {/*Button not linked yet, just takes u to home page to prove it works!*/}
+  return (
+    <View style={styles.container}>
+      <Text>Ello</Text>
+      <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
+
+const Home = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <Text>Home page</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name = "Login" component = {Login}/>
+        <Stack.Screen name = "Home" component = {Home}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;

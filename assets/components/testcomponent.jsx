@@ -1,3 +1,5 @@
-function Welcome(props) {
-    return <h1>Hello, {props.name}</h1>;
-}
+// function Welcome() {
+//     return <div style="background: red; width: 20px; height: 10px;"></div>
+// }
+
+// export default Welcome;
