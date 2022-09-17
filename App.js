@@ -8,37 +8,6 @@ import { Alert, StyleSheet, Button, Text, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
-// import Welcome from './assets/components/testcomponent'
-
-// SAM READ THIS: https://reactjs.org/docs/components-and-props.html
-// const Sam = () => {
-//   return (
-//     <View>
-//       <Button onPress={() => Alert.alert("I got clicked!")} title="Click me!" color="#000" accessibilityLabel="Click me to learn more about what I do!"/>
-//     </View>
-//   )
-// }
-
-// const SamPonent = () => {
-//   return (
-//     <View>
-//       <Sam/>
-//       <Sam/>
-//       <Sam/>
-//     </View>
-//   )
-// }
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Ello</Text>
-//       {/* <SamPonent/> */}
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,8 +15,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
 
+});
+// Components
+// const NavigationBar = ({ navigation }) => {
+//   return (
+//     <View>
+//       <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
+//       <Button title="Request Services"></Button>
+//       <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
+//     </View>
+//   )
+// }
+
+// Pages
 
 const Login = ({ navigation }) => {
   {/*Button not linked yet, just takes u to home page to prove it works!*/}
@@ -55,6 +36,7 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <Text>Ello</Text>
       <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -64,6 +46,28 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Home page</Text>
+
+      <View>
+        <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
+        <Button title="Request Services"></Button>
+        <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
+
+const Profile = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Profile</Text>
+      
+      {/* <NavigationBar/> */}
+      <View>
+        <Button title="Home" onPress={() => navigation.navigate('Home')}></Button>
+        <Button title="Request Services"></Button>
+        <Button title="Profile" onPress={() => navigation.navigate('Profile')}></Button>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -75,6 +79,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name = "Login" component = {Login}/>
         <Stack.Screen name = "Home" component = {Home}/>
+        <Stack.Screen name = "Profile" component = {Profile}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
