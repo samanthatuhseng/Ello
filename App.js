@@ -7,6 +7,58 @@ import { TouchableOpacity, Image, Alert, StyleSheet, Button, Text, View, ScrollV
 // import { render } from 'ejs';
 
 
+// Google Signup API
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+  } from 'react-native-google-signin';
+// ^^^
+
+const [loggedIn, setloggedIn] = useState(false);
+const [userInfo, setuserInfo] = useState([]);
+
+_signIn = async () => {
+  try {
+    await GoogleSignin.hasPlayServices();
+    const {accessToken, idToken} = await GoogleSignin.signIn();
+    setloggedIn(true);
+  } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      // user cancelled the login flow
+      alert('Cancel');
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      alert('Signin in progress');
+      // operation (f.e. sign in) is in progress already
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      alert('PLAY_SERVICES_NOT_AVAILABLE');
+      // play services not available or outdated
+    } else {
+      // some other error happened
+    }
+  }
+};
+
+useEffect(() => {
+  GoogleSignin.configure({
+    scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
+    webClientId:
+      '418977770929-g9ou7r9eva1u78a3anassxxxxxxx.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+  });
+}, []);
+
+signOut = async () => {
+  try {
+    await GoogleSignin.revokeAccess();
+    await GoogleSignin.signOut();
+    setloggedIn(false);
+    setuserInfo([]);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
@@ -15,14 +67,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   navbar: {
+    display: "flex",
+    flexDirection: "row",
     width: "100%",
     // top: "40%",
     // height: 100
     justifyContent: 'space-between',
-    flexDirection: 'column',
+    postion: "absolute",
+    bottom: 0,
+  
+    // flexDirection: 'column',
   },
   navbutton: {
+    display: "flex",
     backgroundColor: 'white',
+    
   }
 
 });
@@ -44,7 +103,14 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Ello</Text>
-      <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button>
+      {/* <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button> */}
+
+      <GoogleSigninButton
+        style={{width: 192, height: 48}}
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={this._signIn}/>
+        
       <StatusBar style="auto"/>
     </View>
   );
@@ -55,6 +121,7 @@ const Home = ({ navigation }) => {
     <ScrollView>
       <ScrollView style={styles.container}>
         <Text>Home page</Text>
+        
         
         <StatusBar style="auto" />
       </ScrollView>

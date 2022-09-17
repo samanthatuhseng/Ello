@@ -1,0 +1,63 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\donal\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-google-singin
+
+PATH: 
+  C:\Program Files\Google\Chrome\Application;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\donal\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\donal\AppData\Local\Programs\Python\Python310\;C:\Users\donal\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\GitHub CLI\;C:\Users\donal\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\donal\AppData\Local\GitHubDesktop\bin;C:\Users\donal\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.4.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/react-native-google-singin: Not found
+      at params.callback [as _callback] (C:\Users\donal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
+      at self.callback (C:\Users\donal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
+      at Request.emit (node:events:537:28)
+      at Request.<anonymous> (C:\Users\donal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
+      at Request.emit (node:events:537:28)
+      at IncomingMessage.<anonymous> (C:\Users\donal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
+      at Object.onceWrapper (node:events:651:28)
+      at IncomingMessage.emit (node:events:549:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "name": "ello",
+    "version": "1.0.0",
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "web": "expo start --web"
+    },
+    "dependencies": {
+      "@react-navigation/native": "^6.0.13",
+      "@react-navigation/native-stack": "^6.9.0",
+      "cookie-parser": "^1.4.6",
+      "dotenv": "^16.0.2",
+      "ejs": "^3.1.8",
+      "expo": "~46.0.9",
+      "expo-status-bar": "~1.4.0",
+      "express": "^4.18.1",
+      "nodemon": "^2.0.20",
+      "react": "18.0.0",
+      "react-native": "0.69.5"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.12.9"
+    },
+    "private": true
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
