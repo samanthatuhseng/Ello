@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <Text>Ello</Text>
       <Button title="Login with Google" onPress={() => navigation.navigate('Home')}></Button>
-      <StatusBar style="auto" />
+      <StatusBar style="auto"/>
     </View>
   );
 };
