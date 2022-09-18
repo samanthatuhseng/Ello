@@ -5,6 +5,9 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView, Alert } from 'react-native';
 // import { render } from 'ejs';
 
+
+import { RadioButton } from 'react-native-paper';
+ 
 // import Login from "./components/Login"
 // import Home from "./components/Home"
 // import Profile from "./components/Profile"
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
     // height: 100
     justifyContent: 'space-between',
     flexDirection: 'row',
+    padding: 20,
   },
   navbutton: {
     backgroundColor: 'white',
@@ -64,9 +68,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     display: 'flex',
-    padding: 20,
     paddingTop: 80,
-    alignItems: 'center'
+    alignItems: 'center',
+
   },
   profile_picture: {
     borderColor: "#000",
@@ -74,6 +78,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 80,
     height: 80
+  },
+  profileform: {
+    width: 100,
+    borderColor: "#000",
+    borderWidth: 2,
+    borderRadius: 60,
+    paddingLeft: 10
   }
 });
 
@@ -123,7 +134,7 @@ const Home = ({ navigation }) => {
           <Text style={styles.TextStyle}>Request Services</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('SignupForm')}>
+        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
           <Image source={require('./assets/navicons/usericon.png')} />
           <View style={styles.SeparatorLine} />
           <Text style={styles.TextStyle}>Profile</Text>
@@ -254,58 +265,129 @@ const Profile = ({ navigation }) => {
   const [profile_dob, pchange_dob] = React.useState("");
   const [profile_ec, pchange_ec] = React.useState("");
   const [profile_ecn, pchange_ecn] = React.useState("");
+// <<<<<<< HEAD
+
+//   return (
+//     <View style={styles.profilecontainer}>
+//       {/* Profile Forms */}
+//       <View>
+//         <Text>Profile</Text>
+//         <Image style={styles.profile_picture} source={require('./assets/favicon.png')} />
+
+//         {/* Forms below */}
+//         <Text>First Name:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_first_name} value={profile_first_name} />
+
+//         <Text>Last Name:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_last_name} value={profile_last_name} />
+
+//         <Text>Email Address:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_email} value={profile_email} />
+
+//         <Text>Home Address:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_address} value={profile_address} />
+
+//         <Text>Date Of Birth:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_dob} value={profile_dob} />
+
+//         <Text>Emergency Contact:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_ec} value={profile_ec} />
+
+//         <Text>Emergency Contact Number:</Text>
+//         <TextInput style={styles.loginform} onChangeText={pchange_ecn} value={profile_ecn} />
+
+//         {/* Forms above ^^^ */}
+//       </View>
+//       {/* Profile Forms */}
+
+//       <View style={styles.navbar}>
+//         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
+//           <Image source={require('./assets/navicons/homeicon.png')} />
+//           <View style={styles.SeparatorLine} />
+//           <Text style={styles.TextStyle}>Home</Text>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
+//           <Image source={require('./assets/navicons/requesticon.png')} />
+//           <View style={styles.SeparatorLine} />
+//           <Text style={styles.TextStyle}>Request Services</Text>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity style={styles.navbutton + "opacity: 0.2"} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
+//           <Image source={require('./assets/navicons/usericon.png')} />
+//           <View style={styles.SeparatorLine} />
+//           <Text style={styles.TextStyle}>Profile</Text>
+//         </TouchableOpacity>
+// =======
+  
+  const [checked, setChecked] = React.useState('Service Provider');
 
   return (
     <View style={styles.profilecontainer}>
-      {/* Profile Forms */}
-      <View>
-        <Text>Profile</Text>
-        <Image style={styles.profile_picture} source={require('./assets/favicon.png')} />
+        {/* Profile Forms */}
+        <View>
+          <Text>Profile</Text>
+          <Image style={styles.profile_picture} source={require('./assets/favicon.png')}/>
 
-        {/* Forms below */}
-        <Text>First Name:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_first_name} value={profile_first_name} />
+          {/* Forms below */}
+          <Text>First Name:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_first_name} value={profile_first_name}/>
 
-        <Text>Last Name:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_last_name} value={profile_last_name} />
+          <Text>Last Name:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_last_name} value={profile_last_name}/>
 
-        <Text>Email Address:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_email} value={profile_email} />
+          <Text>Email Address:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_email} value={profile_email}/>
+      
+          <Text>Home Address:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_address} value={profile_address}/>
+      
+          <Text>Date Of Birth:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_dob} value={profile_dob}/>
+      
+          <Text>Emergency Contact:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_ec} value={profile_ec}/>
 
-        <Text>Home Address:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_address} value={profile_address} />
+          <Text>Emergency Contact Number:</Text>
+          <TextInput style={styles.profileform} onChangeText={pchange_ecn} value={profile_ecn}/>
 
-        <Text>Date Of Birth:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_dob} value={profile_dob} />
+          <Text>Service Provider</Text>
+          <RadioButton
+            value="Service Provider"
+            status={ checked === 'Service Provider' ? 'checked' : 'unchecked' }
+            onPress={() => setChecked('Service Provider')}
+          />
 
-        <Text>Emergency Contact:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_ec} value={profile_ec} />
+          <Text>Service Requester</Text>
+          <RadioButton
+            value="Service Requester"
+            status={ checked === 'Service Requester' ? 'checked' : 'unchecked' }
+            onPress={() => setChecked('Service Requester')}
+          />
 
-        <Text>Emergency Contact Number:</Text>
-        <TextInput style={styles.loginform} onChangeText={pchange_ecn} value={profile_ecn} />
+          {/* Forms above ^^^ */}
+        </View>
+        {/* Profile Forms */}
 
-        {/* Forms above ^^^ */}
-      </View>
-      {/* Profile Forms */}
-
-      <View style={styles.navbar}>
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
-          <Image source={require('./assets/navicons/homeicon.png')} />
-          <View style={styles.SeparatorLine} />
-          <Text style={styles.TextStyle}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
-          <Image source={require('./assets/navicons/requesticon.png')} />
-          <View style={styles.SeparatorLine} />
-          <Text style={styles.TextStyle}>Request Services</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navbutton + "opacity: 0.2"} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
-          <Image source={require('./assets/navicons/usericon.png')} />
-          <View style={styles.SeparatorLine} />
-          <Text style={styles.TextStyle}>Profile</Text>
-        </TouchableOpacity>
+        <View style={styles.navbar}>
+          <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
+              <Image source={require('./assets/navicons/homeicon.png')}/>
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}>Home</Text>
+          </TouchableOpacity>
+         
+          <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
+              <Image source={require('./assets/navicons/requesticon.png')}/>
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}>Request Services</Text>
+          </TouchableOpacity>
+ 
+          <TouchableOpacity style={styles.navbutton + "opacity: 0.2"} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
+              <Image source={require('./assets/navicons/usericon.png')}/>
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}>Profile</Text>
+          </TouchableOpacity>
+{/* >>>>>>> fc4aae4c27d438bbd8d6f60977df12d957c4ab0d */}
       </View>
       <StatusBar style="auto" />
     </View>
