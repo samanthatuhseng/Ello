@@ -14,6 +14,8 @@ import {
   Alert,
 } from "react-native";
 
+import { RadioButton } from 'react-native-paper';
+
 // import DatePicker from 'react-datepicker';
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
+		padding: 20
 	},
 	navbar: {
 		display: "flex",
@@ -683,15 +686,31 @@ const TaskForm = ({ navigation }) => {
 
   const [description, setDescription] = React.useState("lawn mowing");
   const [date, setDate] = React.useState();
+  const [checked, setChecked] = React.useState('Tyler Lee');
 
   return (
     <View style={styles.container}>
-      <Text>Who is Assigned:</Text>
-      <TextInput
+      <Text style={{fontWeight: 'bold'}}>Who do you want to request help from?</Text>
+
+	<Text>Tyler Lee (Rating: 4/5)</Text>
+	  <RadioButton
+        value="Tyler Lee"
+        status={ checked === 'Tyler Lee' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('Tyler Lee')}
+      />
+
+	  <Text>Emma Smith (Rating: 4.4/5)</Text>
+	  <RadioButton
+        value="Emma Smith"
+        status={ checked === 'Emma Smith' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('Emma Smith')}
+      />
+
+      {/* <TextInput
         style={styles.loginform}
         onChangeText={setUsername}
         value={username}
-      />
+      /> */}
 
       <Text>Description:</Text>
       <TextInput
@@ -713,6 +732,40 @@ const TaskForm = ({ navigation }) => {
         title="Add"
         onPress={() => addTask()}
       ></Button>
+
+	<Text style={{paddingTop: 100}}></Text>
+	<View style={styles.navbar}>
+        <TouchableOpacity
+          style={styles.navbutton}
+		  onPress={() => navigation.navigate("Home")}
+        >
+          <Image source={require("./assets/navicons/homeicon.png")} />
+          <View style={styles.SeparatorLine} />
+          <Text style={styles.TextStyle}>Home</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navbutton}
+          onPress={() => navigation.navigate("TaskForm")}
+        >
+          <View style={styles.circle}>
+            <Image
+              source={require("./assets/navicons/requesticon.png")}
+            />
+          </View>
+          <View style={styles.SeparatorLine} />
+          <Text style={styles.TextStyle}>Request Services</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navbutton}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Image source={require("./assets/navicons/usericon.png")} />
+          <View style={styles.SeparatorLine} />
+          <Text style={styles.TextStyle}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
