@@ -2,7 +2,7 @@ import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView, TextInput, Alert } from 'react-native';
+import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView, Alert } from 'react-native';
 // import { render } from 'ejs';
 
 // import Login from "./components/Login"
@@ -11,6 +11,7 @@ import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, Scr
 
 // import Navbar from "./components/"
 
+const SERVER_URL = 'https://f3e9-2620-101-f000-704-8000-00-182e.ngrok.io'
 
 const Stack = createNativeStackNavigator();
 
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   loginformbtn: {
-  
+
   },
   profilecontainer: {
     flex: 1,
@@ -94,11 +95,11 @@ const Login = ({ navigation }) => {
       {/* <TouchableOpacity style={styles.loginbtn} activeOpacity={0.5} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.loginbtntext}>Login</Text>
         </TouchableOpacity> */}
- 
+
       <Button title="Login" onPress={() => navigation.navigate("LoginForm")}></Button>
       <Text></Text>
       {/* Adds a new line in between the buttons */}
-      <Button title="Sign Up!" onPress={() => navigation.navigate("Profile")}></Button>
+      <Button title="Sign Up!" onPress={() => navigation.navigate("SignupForm")}></Button>
 
       <StatusBar style="auto" />
     </View>
@@ -122,7 +123,7 @@ const Home = ({ navigation }) => {
           <Text style={styles.TextStyle}>Request Services</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
+        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('SignupForm')}>
           <Image source={require('./assets/navicons/usericon.png')} />
           <View style={styles.SeparatorLine} />
           <Text style={styles.TextStyle}>Profile</Text>
@@ -132,59 +133,114 @@ const Home = ({ navigation }) => {
 
   );
 };
- 
-const LoginForm = ({ navigation }) => {
 
-  const signIn = () => {
-    fetch("http://localhost:3000/user/signin", {
+const SignupForm = ({ navigation }) => {
+
+  const { setUsername } = React.useContext(UsernameContext);
+
+  const signUp = () => {
+    fetch(`${SERVER_URL}/user/signup`, {
       method: "POST", body: JSON.stringify({
-        email: '',
-        password: ''
-      })
-    })
+        username: login_name,
+        email,
+        password: login_password,
+        role
+      }), headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((rawRes) => {
+      return rawRes.json()
+    }).then((res) => {
+      console.log('res data', res)
+      setUsername(res?.data?.username)
+    }).catch((response) => console.error(response))
   }
 
-  const [login_name, onChangeText_name] = React.useState("");
-  const [login_password, onChangeText_password] = React.useState("");
+  const [login_name, onChangeText_name] = React.useState("usernameaaa");
+  const [login_password, onChangeText_password] = React.useState("asdfasdf");
+  const [email, setEmail] = React.useState("asd@gmail.com");
+  const [role, setRole] = React.useState("asdf");
 
   return (
     <View style={styles.loginformcontainer}>
-      <Text>First Name:</Text>
-      <TextInput style={styles.loginform} onChangeText={onChangeText_name} value={login_name}/>
-      
+      <Text>Username:</Text>
+      <TextInput style={styles.loginform} onChangeText={onChangeText_name} value={login_name} />
+
       <Text>Password:</Text>
-      <TextInput style={styles.loginform} onChangeText={onChangeText_password} value={login_password}/>
+      <TextInput style={styles.loginform} onChangeText={onChangeText_password} value={login_password} />
+
+      <Text>Email:</Text>
+      <TextInput style={styles.loginform} onChangeText={setEmail} value={email} />
+
+      <Text>Role:</Text>
+      <TextInput style={styles.loginform} onChangeText={setRole} value={role} />
 
       <Text></Text>
-      <Button style={styles.loginformbtn} title="Login" onPress={() => Alert.alert("Login!")}></Button>
+      <Button style={styles.loginformbtn} title="Sign Up" onPress={() => signUp()}></Button>
+    </View>
+  );
+}
+
+const LoginForm = ({ navigation }) => {
+
+  const signIn = () => {
+    fetch(`${SERVER_URL}/user/signin`, {
+      method: "POST", body: JSON.stringify({
+        email,
+        password: login_password
+      }), headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((rawRes) => {
+      return rawRes.json()
+    }).then((res) => {
+      console.log('res data', res)
+    }).then(() => {
+      navigation.navigate('Home')
+    }).catch((response) => console.error(response))
+  }
+
+  const [email, setEmail] = React.useState("asd@gmail.com");
+  const [login_password, onChangeText_password] = React.useState("asdfasdf");
+
+  return (
+    <View style={styles.loginformcontainer}>
+      <Text>Email:</Text>
+      <TextInput style={styles.loginform} onChangeText={setEmail} value={email} />
+
+      <Text>Password:</Text>
+      <TextInput style={styles.loginform} onChangeText={onChangeText_password} value={login_password} />
+
+      <Text></Text>
+      <Button style={styles.loginformbtn} title="Login" onPress={() => signIn()}></Button>
     </View>
   );
 };
- 
+
 const Services = ({ navigation }) => {
   return (
-      <View style={styles.container}>
-            <View style={styles.navbar}>
-              <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
-                  <Image source={require('./assets/navicons/homeicon.png')}/>
-                  <View style={styles.SeparatorLine} />
-                  <Text style={styles.TextStyle}>Home</Text>
-              </TouchableOpacity>
-            
-              <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
-                  <Image source={require('./assets/navicons/requesticon.png')}/>
-                  <View style={styles.SeparatorLine} />
-                  <Text style={styles.TextStyle}>Request Services</Text>
-              </TouchableOpacity>
-      
-              <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
-                  <Image source={require('./assets/navicons/usericon.png')}/>
-                  <View style={styles.SeparatorLine} />
-                  <Text style={styles.TextStyle}>Profile</Text>
-              </TouchableOpacity>
-          </View>
-          <StatusBar style="auto" />
+    <View style={styles.container}>
+      <View style={styles.navbar}>
+        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
+          <Image source={require('./assets/navicons/homeicon.png')} />
+          <View style={styles.SeparatorLine} />
+          <Text style={styles.TextStyle}>Home</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
+          <Image source={require('./assets/navicons/requesticon.png')} />
+          <View style={styles.SeparatorLine} />
+          <Text style={styles.TextStyle}>Request Services</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
+          <Image source={require('./assets/navicons/usericon.png')} />
+          <View style={styles.SeparatorLine} />
+          <Text style={styles.TextStyle}>Profile</Text>
+        </TouchableOpacity>
       </View>
+      <StatusBar style="auto" />
+    </View>
   );
 };
 
@@ -196,39 +252,39 @@ const Profile = ({ navigation }) => {
   const [profile_dob, pchange_dob] = React.useState("");
   const [profile_ec, pchange_ec] = React.useState("");
   const [profile_ecn, pchange_ecn] = React.useState("");
- 
+
   return (
     <View style={styles.profilecontainer}>
-        {/* Profile Forms */}
-        <View>
-          <Text>Profile</Text>
-          <Image style={styles.profile_picture} source={require('./assets/favicon.png')}/>
+      {/* Profile Forms */}
+      <View>
+        <Text>Profile</Text>
+        <Image style={styles.profile_picture} source={require('./assets/favicon.png')} />
 
-          {/* Forms below */}
-          <Text>First Name:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_first_name} value={profile_first_name}/>
+        {/* Forms below */}
+        <Text>First Name:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_first_name} value={profile_first_name} />
 
-          <Text>Last Name:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_last_name} value={profile_last_name}/>
+        <Text>Last Name:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_last_name} value={profile_last_name} />
 
-          <Text>Email Address:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_email} value={profile_email}/>
-      
-          <Text>Home Address:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_address} value={profile_address}/>
-      
-          <Text>Date Of Birth:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_dob} value={profile_dob}/>
-      
-          <Text>Emergency Contact:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_ec} value={profile_ec}/>
+        <Text>Email Address:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_email} value={profile_email} />
 
-          <Text>Emergency Contact Number:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_ecn} value={profile_ecn}/>
-      
-          {/* Forms above ^^^ */}
-        </View>
-        {/* Profile Forms */}
+        <Text>Home Address:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_address} value={profile_address} />
+
+        <Text>Date Of Birth:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_dob} value={profile_dob} />
+
+        <Text>Emergency Contact:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_ec} value={profile_ec} />
+
+        <Text>Emergency Contact Number:</Text>
+        <TextInput style={styles.loginform} onChangeText={pchange_ecn} value={profile_ecn} />
+
+        {/* Forms above ^^^ */}
+      </View>
+      {/* Profile Forms */}
 
       <View style={styles.navbar}>
         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
@@ -254,17 +310,27 @@ const Profile = ({ navigation }) => {
   );
 }
 
+const UsernameContext = React.createContext("");
+
 const App = () => {
+  const [username, setUsername] = React.useState("");
+  console.log(username, 'username')
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Services" component={Services} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="LoginForm" component={LoginForm} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UsernameContext.Provider value={{ username, setUsername }}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignupForm" component={SignupForm} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Services" component={Services} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="LoginForm" component={LoginForm} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UsernameContext.Provider>
+
+
   );
 };
 
