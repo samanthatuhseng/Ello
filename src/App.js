@@ -685,7 +685,7 @@ const TaskForm = ({ navigation }) => {
   const [date, setDate] = React.useState();
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Who is Assigned:</Text>
       <TextInput
         style={styles.loginform}
