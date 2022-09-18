@@ -153,6 +153,8 @@ const SignupForm = ({ navigation }) => {
     }).then((res) => {
       console.log('res data', res)
       setUsername(res?.data?.username)
+    }).then(()=>{
+      navigation.navigate('Login')
     }).catch((response) => console.error(response))
   }
 
