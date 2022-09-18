@@ -24,6 +24,10 @@ import {
 const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
+	text: {
+		color: "#291E54",
+		fontColor: "red",
+	},
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
@@ -93,6 +97,94 @@ const styles = StyleSheet.create({
 		width: 80,
 		height: 80,
 	},
+	title: {
+		fontSize: 28,
+		fontWeight: "bold",
+		color: "#291E54",
+	},
+	taskMain: {
+		height: 200,
+		width: "90%",
+		backgroundColor: "#DDE3FD",
+		opacity: "30%",
+		borderTopRightRadius: 15,
+		borderTopLeftRadius: 15,
+		borderBottomLeftRadius: 15,
+		borderBottomRightRadius: 15,
+	},
+	taskHeader: {
+		height: 50,
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		borderTopRightRadius: 15,
+		borderTopLeftRadius: 15,
+		paddingLeft: 15,
+		marginBottom: 10,
+		backgroundColor: "#A7B7FC",
+	},
+	taskTitle: {
+		fontSize: 25,
+		fontWeight: "bold",
+		color: "#291E54",
+	},
+	taskIcon: {
+		height: 30,
+		resizeMode: "contain",
+	},
+	interiorIcon: {
+		height: 25,
+		resizeMode: "contain",
+		margin: 0,
+		marginRight: -5,
+	},
+	location: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignContent: "center",
+		marginLeft: -35,
+	},
+	date: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignContent: "center",
+		marginTop: 10,
+		marginLeft: -35,
+	},
+	taskInteriorText: {
+		fontSize: 18,
+		left: -40,
+		color: "#291E54",
+	},
+	taskBox: {
+		display: "flex",
+		flexDirection: "row",
+	},
+	helperPicture: {
+		marginLeft: -20,
+	},
+	taskColumn: {
+		display: "flex",
+		flexDirection: "column",
+	},
+	taskDescription: {
+		fontSize: 18,
+		marginLeft: 18,
+		marginTop: 10,
+		color: "#291E54",
+	},
+	blue: {
+		backgroundColor: "#A7B7FC",
+	},
+	orange: {
+		backgroundColor: "#ED7470",
+	},
+	lightOrange: {
+		backgroundColor: "#FFD7C2",
+		opacity: "50%",
+	},
 });
 
 // Pages
@@ -134,6 +226,92 @@ const Login = ({ navigation }) => {
 const Home = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
+			<Text style={styles.title}> New Task </Text>
+
+			<Text style={styles.title}> Upcoming Tasks </Text>
+
+			<View style={styles.taskMain}>
+				<View style={styles.taskHeader}>
+					<Image
+						style={styles.taskIcon}
+						source={require("./assets/navicons/lawn-mower.png")}
+					/>
+					<Text style={styles.taskTitle}> Lawn Mowing </Text>
+				</View>
+				<View style={styles.taskColumn}>
+					<View style={styles.taskBox}>
+						<View>
+							<View style={styles.location}>
+								<Image
+									style={styles.interiorIcon}
+									source={require("./assets/navicons/maps-and-flags.png")}
+								/>
+								<Text style={styles.taskInteriorText}>
+									74 University Drive
+								</Text>
+							</View>
+							<View style={styles.date}>
+								<Image
+									style={styles.interiorIcon}
+									source={require("./assets/navicons/calendar.png")}
+								/>
+								<Text style={styles.taskInteriorText}>
+									2:00 pm September 20th
+								</Text>
+							</View>
+						</View>
+						<Image
+							style={styles.helperPicture}
+							source={require("./assets/navicons/Helper1.png")}
+						/>
+					</View>
+					<Text style={styles.taskDescription}>
+						Andrew will be coming at 2:00 to mow your lawn.{" "}
+					</Text>
+				</View>
+			</View>
+
+			<View style={styles.taskMain}>
+				<View style={[styles.taskHeader, styles.orange]}>
+					<Image
+						style={styles.taskIcon}
+						source={require("./assets/navicons/lawn-mower.png")}
+					/>
+					<Text style={styles.taskTitle}> Lawn Mowing </Text>
+				</View>
+				<View style={styles.taskColumn}>
+					<View style={styles.taskBox}>
+						<View>
+							<View style={styles.location}>
+								<Image
+									style={styles.interiorIcon}
+									source={require("./assets/navicons/maps-and-flags.png")}
+								/>
+								<Text style={styles.taskInteriorText}>
+									74 University Drive
+								</Text>
+							</View>
+							<View style={styles.date}>
+								<Image
+									style={styles.interiorIcon}
+									source={require("./assets/navicons/calendar.png")}
+								/>
+								<Text style={styles.taskInteriorText}>
+									2:00 pm September 20th
+								</Text>
+							</View>
+						</View>
+						<Image
+							style={styles.helperPicture}
+							source={require("./assets/navicons/Helper1.png")}
+						/>
+					</View>
+					<Text style={styles.taskDescription}>
+						Andrew will be coming at 2:00 to mow your lawn.{" "}
+					</Text>
+				</View>
+			</View>
+
 			<View style={styles.navbar}>
 				<TouchableOpacity
 					style={styles.navbutton}
@@ -205,7 +383,8 @@ const LoginForm = ({ navigation }) => {
 
 const Services = ({ navigation }) => {
 	return (
-		<View style={styles.container}>
+		<View>
+			<Text>New Tasks</Text>
 			<View style={styles.navbar}>
 				<TouchableOpacity
 					style={styles.navbutton}
