@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
  
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Image, Alert, StyleSheet, Button, Text, View, ScrollView } from 'react-native';
+import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView } from 'react-native';
 // import { render } from 'ejs';
  
 // import Login from "./components/Login"
@@ -42,6 +42,18 @@ const styles = StyleSheet.create({
   },
   loginbtntext: {
     color: 'black'
+  },
+  loginformcontainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loginform: {
+    borderColor: "#000",
+    borderWidth: 2,
+    width: "70%"
   }
 });
  
@@ -106,11 +118,19 @@ const Home = ({ navigation }) => {
 };
  
 const LoginForm = ({ navigation }) => {
+  const [login_name, onChangeText_name] = React.useState("");
+  const [login_password, onChangeText_password] = React.useState("");
+
   return (
-    <Text>Sign in!</Text>
+    <View style={styles.loginformcontainer}>
+      <Text>First Name:</Text>
+      <TextInput style={styles.loginform} onChangeText={onChangeText_name} value={login_name}/>
+      
+      <Text>Password:</Text>
+      <TextInput style={styles.loginform} onChangeText={onChangeText_password} value={login_password}/>
+    </View>
   );
 };
- 
  
 const Services = ({ navigation }) => {
   return (
