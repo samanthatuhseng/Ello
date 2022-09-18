@@ -23,6 +23,8 @@ import {
 
 // import Navbar from "./components/"
 
+const SERVER_URL = 'https://f3e9-2620-101-f000-704-8000-00-182e.ngrok.io'
+
 const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
@@ -229,7 +231,7 @@ const Login = ({ navigation }) => {
 			{/* Adds a new line in between the buttons */}
 			<Button
 				title="Sign Up!"
-				onPress={() => navigation.navigate("Profile")}
+				onPress={() => navigation.navigate("SignupForm")}
 			></Button>
 
 			<StatusBar style="auto" />
