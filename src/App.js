@@ -15,7 +15,7 @@ import {
 } from "react-native";
 // import { render } from 'ejs';
 
-import { RadioButton } from "react-native-paper";
+// import { RadioButton } from "react-native-paper";
 
 // import Login from "./components/Login"
 // import Home from "./components/Home"
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
+		justifyContent: "flex-start",
 		borderTopRightRadius: 15,
 		borderTopLeftRadius: 15,
 		paddingLeft: 15,
@@ -129,10 +130,12 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		fontWeight: "bold",
 		color: "#291E54",
+		textAlign: "left",
 	},
 	taskIcon: {
 		height: 30,
 		resizeMode: "contain",
+		margin: 0,
 	},
 	interiorIcon: {
 		height: 25,
@@ -176,6 +179,13 @@ const styles = StyleSheet.create({
 		marginLeft: 18,
 		marginTop: 10,
 		color: "#291E54",
+		marginRight: 10,
+	},
+	vacuum: {
+		marginLeft: -47,
+	},
+	cleaning: {
+		marginLeft: -44,
 	},
 	blue: {
 		backgroundColor: "#A7B7FC",
@@ -186,6 +196,8 @@ const styles = StyleSheet.create({
 	lightOrange: {
 		backgroundColor: "#FFD7C2",
 		opacity: "50%",
+		marginTop: 20,
+		marginBottom: 20,
 	},
 });
 
@@ -276,10 +288,13 @@ const Home = ({ navigation }) => {
 			<View style={[styles.taskMain, styles.lightOrange]}>
 				<View style={[styles.taskHeader, styles.orange]}>
 					<Image
-						style={styles.taskIcon}
+						style={[styles.taskIcon, styles.vacuum]}
 						source={require("./assets/navicons/vacuum-cleaner.png")}
 					/>
-					<Text style={styles.taskTitle}> Cleaning </Text>
+					<Text style={[styles.taskTitle, styles.cleaning]}>
+						{" "}
+						Cleaning{" "}
+					</Text>
 				</View>
 				<View style={styles.taskColumn}>
 					<View style={styles.taskBox}>
@@ -309,7 +324,7 @@ const Home = ({ navigation }) => {
 						/>
 					</View>
 					<Text style={styles.taskDescription}>
-						Andrew will be coming at 2:00 to mow your lawn.{" "}
+						Joanna will be coming at 8:30am to clean your house.
 					</Text>
 				</View>
 			</View>
