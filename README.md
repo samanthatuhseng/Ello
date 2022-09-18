@@ -2,7 +2,8 @@
 
 ## How to run:
 ### The backend:
-```cd server
+```
+cd server
 npm i
 npm start
 ```
@@ -12,3 +13,4 @@ new terminal
 cd src
 npm i 
 npm start
+```
