@@ -23,6 +23,8 @@ import {
 
 // import Navbar from "./components/"
 
+const SERVER_URL = 'https://f3e9-2620-101-f000-704-8000-00-182e.ngrok.io'
+
 const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
 	loginform: {
 		borderColor: "#000",
 		borderWidth: 2,
-		width: "70%",
+		width: 300,
 		borderRadius: 60,
 		paddingLeft: 10,
 	},
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
 		borderRadius: 50,
 		width: 80,
 		height: 80,
+		marginLeft: 100
 	},
 	title: {
 		fontSize: 28,
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
 		height: 200,
 		width: "90%",
 		backgroundColor: "#DDE3FD",
-		opacity: "30%",
+		// opacity: "30%",
 		borderTopRightRadius: 15,
 		borderTopLeftRadius: 15,
 		borderBottomLeftRadius: 15,
@@ -195,7 +198,7 @@ const styles = StyleSheet.create({
 	},
 	lightOrange: {
 		backgroundColor: "#FFD7C2",
-		opacity: "50%",
+		// opacity: "50%",
 		marginTop: 20,
 		marginBottom: 20,
 	},
@@ -229,7 +232,7 @@ const Login = ({ navigation }) => {
 			{/* Adds a new line in between the buttons */}
 			<Button
 				title="Sign Up!"
-				onPress={() => navigation.navigate("Profile")}
+				onPress={() => navigation.navigate("SignupForm")}
 			></Button>
 
 			<StatusBar style="auto" />
@@ -240,8 +243,6 @@ const Login = ({ navigation }) => {
 const Home = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}> New Task </Text>
-
 			<Text style={styles.title}> Upcoming Tasks </Text>
 
 			<View style={styles.taskMain}>
@@ -332,7 +333,6 @@ const Home = ({ navigation }) => {
 			<View style={styles.navbar}>
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Home")}
 				>
 					<Image source={require("./assets/navicons/homeicon.png")} />
@@ -342,7 +342,6 @@ const Home = ({ navigation }) => {
 
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Services")}
 				>
 					<View style={styles.circle}>
@@ -356,7 +355,6 @@ const Home = ({ navigation }) => {
 
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Profile")}
 				>
 					<Image source={require("./assets/navicons/usericon.png")} />
@@ -375,7 +373,6 @@ const Services = ({ navigation }) => {
 			<View style={styles.navbar}>
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Home")}
 				>
 					<Image source={require("./assets/navicons/homeicon.png")} />
@@ -385,7 +382,6 @@ const Services = ({ navigation }) => {
 
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Services")}
 				>
 					<View style={styles.circle}>
@@ -399,7 +395,6 @@ const Services = ({ navigation }) => {
 
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Profile")}
 				>
 					<Image source={require("./assets/navicons/usericon.png")} />
@@ -425,7 +420,7 @@ const Profile = ({ navigation }) => {
 		<View style={styles.profilecontainer}>
 			{/* Profile Forms */}
 			<View>
-				<Text>Profile</Text>
+				<Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center', paddingBottom: 20}}>Profile</Text>
 				<Image
 					style={styles.profile_picture}
 					source={require("./assets/favicon.png")}
@@ -482,13 +477,14 @@ const Profile = ({ navigation }) => {
 				/>
 
 				{/* Forms above ^^^ */}
+
+				<View style={{paddingBottom: 100}}></View>
 			</View>
 			{/* Profile Forms */}
 
 			<View style={styles.navbar}>
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Home")}
 				>
 					<Image source={require("./assets/navicons/homeicon.png")} />
@@ -498,7 +494,6 @@ const Profile = ({ navigation }) => {
 
 				<TouchableOpacity
 					style={styles.navbutton}
-					activeOpacity={0.5}
 					onPress={() => navigation.navigate("Services")}
 				>
 					<View style={styles.circle}>
@@ -511,8 +506,7 @@ const Profile = ({ navigation }) => {
 				</TouchableOpacity>
 
 				<TouchableOpacity
-					style={styles.navbutton + "opacity: 0.2"}
-					activeOpacity={0.5}
+					style={styles.navbutton}
 					onPress={() => navigation.navigate("Profile")}
 				>
 					<Image source={require("./assets/navicons/usericon.png")} />
