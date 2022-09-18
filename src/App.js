@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
- 
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView } from 'react-native';
+import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView, Alert } from 'react-native';
 // import { render } from 'ejs';
  
 // import Login from "./components/Login"
@@ -53,7 +52,27 @@ const styles = StyleSheet.create({
   loginform: {
     borderColor: "#000",
     borderWidth: 2,
-    width: "70%"
+    width: "70%",
+    borderRadius: 60,
+    paddingLeft: 10
+  },
+  loginformbtn: {
+  
+  },
+  profilecontainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    display: 'flex',
+    padding: 20,
+    paddingTop: 80,
+    alignItems: 'center'
+  },
+  profile_picture: {
+    borderColor: "#000",
+    borderWidth: 2,
+    borderRadius: 50,
+    width: 80,
+    height: 80
   }
 });
  
@@ -75,7 +94,7 @@ const Login = ({ navigation }) => {
         {/* <TouchableOpacity style={styles.loginbtn} activeOpacity={0.5} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.loginbtntext}>Login</Text>
         </TouchableOpacity> */}
- 
+  
       <Button title="Login" onPress={() => navigation.navigate("LoginForm")}></Button>
       <Text></Text>
       {/* Adds a new line in between the buttons */}
@@ -88,10 +107,7 @@ const Login = ({ navigation }) => {
  
 const Home = ({ navigation }) => {
   return (
-    <ScrollView>
-      <ScrollView style={styles.container}>
-        <StatusBar style="auto" />
-      </ScrollView>
+    <View style={styles.container}>
  
       <View style={styles.navbar}>
         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
@@ -112,7 +128,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.TextStyle}>Profile</Text>
         </TouchableOpacity>
     </View>
-    </ScrollView>
+    </View>
      
   );
 };
@@ -128,44 +144,82 @@ const LoginForm = ({ navigation }) => {
       
       <Text>Password:</Text>
       <TextInput style={styles.loginform} onChangeText={onChangeText_password} value={login_password}/>
+
+      <Text></Text>
+      <Button style={styles.loginformbtn} title="Login" onPress={() => Alert.alert("Login!")}></Button>
     </View>
   );
 };
  
 const Services = ({ navigation }) => {
   return (
-    <ScrollView>
-      <ScrollView style={styles.container}>
-        <StatusBar style="auto" />
-      </ScrollView>
- 
-      <View style={styles.navbar}>
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
-            <Image source={require('./assets/navicons/homeicon.png')}/>
-            <View style={styles.SeparatorLine} />
-            <Text style={styles.TextStyle}>Home</Text>
-        </TouchableOpacity>
-       
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
-            <Image source={require('./assets/navicons/requesticon.png')}/>
-            <View style={styles.SeparatorLine} />
-            <Text style={styles.TextStyle}>Request Services</Text>
-        </TouchableOpacity>
- 
-        <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
-            <Image source={require('./assets/navicons/usericon.png')}/>
-            <View style={styles.SeparatorLine} />
-            <Text style={styles.TextStyle}>Profile</Text>
-        </TouchableOpacity>
-    </View>
-    </ScrollView>
-     
+      <View style={styles.container}>
+            <View style={styles.navbar}>
+              <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
+                  <Image source={require('./assets/navicons/homeicon.png')}/>
+                  <View style={styles.SeparatorLine} />
+                  <Text style={styles.TextStyle}>Home</Text>
+              </TouchableOpacity>
+            
+              <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Services')}>
+                  <Image source={require('./assets/navicons/requesticon.png')}/>
+                  <View style={styles.SeparatorLine} />
+                  <Text style={styles.TextStyle}>Request Services</Text>
+              </TouchableOpacity>
+      
+              <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
+                  <Image source={require('./assets/navicons/usericon.png')}/>
+                  <View style={styles.SeparatorLine} />
+                  <Text style={styles.TextStyle}>Profile</Text>
+              </TouchableOpacity>
+          </View>
+          <StatusBar style="auto" />
+      </View>
   );
 };
  
 const Profile = ({ navigation }) => {
+  const [profile_first_name, pchange_first_name] = React.useState("");
+  const [profile_last_name, pchange_last_name] = React.useState("");
+  const [profile_email, pchange_email] = React.useState("");
+  const [profile_address, pchange_address] = React.useState("");
+  const [profile_dob, pchange_dob] = React.useState("");
+  const [profile_ec, pchange_ec] = React.useState("");
+  const [profile_ecn, pchange_ecn] = React.useState("");
+ 
   return (
-    <View>
+    <View style={styles.profilecontainer}>
+        {/* Profile Forms */}
+        <View>
+          <Text>Profile</Text>
+          <Image style={styles.profile_picture} source={require('./assets/favicon.png')}/>
+
+          {/* Forms below */}
+          <Text>First Name:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_first_name} value={profile_first_name}/>
+
+          <Text>Last Name:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_last_name} value={profile_last_name}/>
+
+          <Text>Email Address:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_email} value={profile_email}/>
+      
+          <Text>Home Address:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_address} value={profile_address}/>
+      
+          <Text>Date Of Birth:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_dob} value={profile_dob}/>
+      
+          <Text>Emergency Contact:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_ec} value={profile_ec}/>
+
+          <Text>Emergency Contact Number:</Text>
+          <TextInput style={styles.loginform} onChangeText={pchange_ecn} value={profile_ecn}/>
+      
+          {/* Forms above ^^^ */}
+        </View>
+        {/* Profile Forms */}
+
         <View style={styles.navbar}>
           <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
               <Image source={require('./assets/navicons/homeicon.png')}/>
