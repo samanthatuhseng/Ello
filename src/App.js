@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity, Image, TextInput, StyleSheet, Button, Text, View, ScrollView, Alert } from 'react-native';
 // import { render } from 'ejs';
+
+import { RadioButton } from 'react-native-paper';
  
 // import Login from "./components/Login"
 // import Home from "./components/Home"
@@ -195,7 +197,9 @@ const Profile = ({ navigation }) => {
   const [profile_dob, pchange_dob] = React.useState("");
   const [profile_ec, pchange_ec] = React.useState("");
   const [profile_ecn, pchange_ecn] = React.useState("");
- 
+  
+  const [checked, setChecked] = React.useState('Service Provider');
+
   return (
     <View style={styles.profilecontainer}>
         {/* Profile Forms */}
@@ -224,7 +228,21 @@ const Profile = ({ navigation }) => {
 
           <Text>Emergency Contact Number:</Text>
           <TextInput style={styles.profileform} onChangeText={pchange_ecn} value={profile_ecn}/>
-      
+
+          <Text>Service Provider</Text>
+          <RadioButton
+            value="Service Provider"
+            status={ checked === 'Service Provider' ? 'checked' : 'unchecked' }
+            onPress={() => setChecked('Service Provider')}
+          />
+
+          <Text>Service Requester</Text>
+          <RadioButton
+            value="Service Requester"
+            status={ checked === 'Service Requester' ? 'checked' : 'unchecked' }
+            onPress={() => setChecked('Service Requester')}
+          />
+
           {/* Forms above ^^^ */}
         </View>
         {/* Profile Forms */}
