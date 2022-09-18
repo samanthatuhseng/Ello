@@ -271,13 +271,13 @@ const Home = ({ navigation }) => {
 				</View>
 			</View>
 
-			<View style={styles.taskMain}>
+			<View style={[styles.taskMain, styles.lightOrange]}>
 				<View style={[styles.taskHeader, styles.orange]}>
 					<Image
 						style={styles.taskIcon}
-						source={require("./assets/navicons/lawn-mower.png")}
+						source={require("./assets/navicons/vacuum-cleaner.png")}
 					/>
-					<Text style={styles.taskTitle}> Lawn Mowing </Text>
+					<Text style={styles.taskTitle}> Cleaning </Text>
 				</View>
 				<View style={styles.taskColumn}>
 					<View style={styles.taskBox}>
@@ -297,7 +297,7 @@ const Home = ({ navigation }) => {
 									source={require("./assets/navicons/calendar.png")}
 								/>
 								<Text style={styles.taskInteriorText}>
-									2:00 pm September 20th
+									4:30 pm September 27th
 								</Text>
 							</View>
 						</View>
