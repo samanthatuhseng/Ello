@@ -15,6 +15,8 @@ import {
 } from "react-native";
 // import { render } from 'ejs';
 
+import { RadioButton } from "react-native-paper";
+
 // import Login from "./components/Login"
 // import Home from "./components/Home"
 // import Profile from "./components/Profile"
@@ -191,21 +193,21 @@ const styles = StyleSheet.create({
 
 const Login = ({ navigation }) => {
 	{
-		/*Button not linked yet, just takes u to home page to prove it works!*/
+		/* Button not linked yet, just takes u to home page to prove it works! */
 	}
 	return (
 		<View style={styles.container}>
 			<Image source={require("./assets/homebg.png")}></Image>
 
-			{/* <TouchableOpacity onPress={() => navigation.navigate("LoginForm")}>
+			{/* { <TouchableOpacity onPress={() => navigation.navigate("LoginForm")}>
         <View style={styles.loginbtn}>
             <Text style={styles.loginbtntext}>Login</Text>
         </View>
-      </TouchableOpacity> */}
+      </TouchableOpacity> }
 
-			{/* <TouchableOpacity style={styles.loginbtn} activeOpacity={0.5} onPress={() => navigation.navigate('Login')}>
+			{ <TouchableOpacity style={styles.loginbtn} activeOpacity={0.5} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.loginbtntext}>Login</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>} */}
 
 			<Button
 				title="Login"
@@ -347,36 +349,6 @@ const Home = ({ navigation }) => {
 					<Text style={styles.TextStyle}>Profile</Text>
 				</TouchableOpacity>
 			</View>
-		</View>
-	);
-};
-
-const LoginForm = ({ navigation }) => {
-	const [login_name, onChangeText_name] = React.useState("");
-	const [login_password, onChangeText_password] = React.useState("");
-
-	return (
-		<View style={styles.loginformcontainer}>
-			<Text>First Name:</Text>
-			<TextInput
-				style={styles.loginform}
-				onChangeText={onChangeText_name}
-				value={login_name}
-			/>
-
-			<Text>Password:</Text>
-			<TextInput
-				style={styles.loginform}
-				onChangeText={onChangeText_password}
-				value={login_password}
-			/>
-
-			<Text></Text>
-			<Button
-				style={styles.loginformbtn}
-				title="Login"
-				onPress={() => Alert.alert("Login!")}
-			></Button>
 		</View>
 	);
 };
@@ -538,17 +510,152 @@ const Profile = ({ navigation }) => {
 	);
 };
 
-const App = () => {
+const SignupForm = ({ navigation }) => {
+	const { setUsername } = React.useContext(UsernameContext);
+
+	const signUp = () => {
+		fetch(`${SERVER_URL}/user/signup`, {
+			method: "POST",
+			body: JSON.stringify({
+				username: login_name,
+				email,
+				password: login_password,
+				role,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((rawRes) => {
+				return rawRes.json();
+			})
+			.then((res) => {
+				console.log("res data", res);
+				setUsername(res?.data?.username);
+			})
+			.then(() => {
+				navigation.navigate("Login");
+			})
+			.catch((response) => console.error(response));
+	};
+
+	const [login_name, onChangeText_name] = React.useState("usernameaaa");
+	const [login_password, onChangeText_password] = React.useState("asdfasdf");
+	const [email, setEmail] = React.useState("asd@gmail.com");
+	const [role, setRole] = React.useState("asdf");
+
 	return (
-		<NavigationContainer>
-			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen name="Login" component={Login} />
-				<Stack.Screen name="Home" component={Home} />
-				<Stack.Screen name="Services" component={Services} />
-				<Stack.Screen name="Profile" component={Profile} />
-				<Stack.Screen name="LoginForm" component={LoginForm} />
-			</Stack.Navigator>
-		</NavigationContainer>
+		<View style={styles.loginformcontainer}>
+			<Text>Username:</Text>
+			<TextInput
+				style={styles.loginform}
+				onChangeText={onChangeText_name}
+				value={login_name}
+			/>
+
+			<Text>Password:</Text>
+			<TextInput
+				style={styles.loginform}
+				onChangeText={onChangeText_password}
+				value={login_password}
+			/>
+
+			<Text>Email:</Text>
+			<TextInput
+				style={styles.loginform}
+				onChangeText={setEmail}
+				value={email}
+			/>
+
+			<Text>Role:</Text>
+			<TextInput
+				style={styles.loginform}
+				onChangeText={setRole}
+				value={role}
+			/>
+
+			<Text></Text>
+			<Button
+				style={styles.loginformbtn}
+				title="Sign Up"
+				onPress={() => signUp()}
+			></Button>
+		</View>
+	);
+};
+
+const LoginForm = ({ navigation }) => {
+	const signIn = () => {
+		fetch(`${SERVER_URL}/user/signin`, {
+			method: "POST",
+			body: JSON.stringify({
+				email,
+				password: login_password,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((rawRes) => {
+				return rawRes.json();
+			})
+			.then((res) => {
+				console.log("res data", res);
+			})
+			.then(() => {
+				navigation.navigate("Home");
+			})
+			.catch((response) => console.error(response));
+	};
+
+	const [email, setEmail] = React.useState("asd@gmail.com");
+	const [login_password, onChangeText_password] = React.useState("asdfasdf");
+
+	return (
+		<View style={styles.loginformcontainer}>
+			<Text>Email:</Text>
+			<TextInput
+				style={styles.loginform}
+				onChangeText={setEmail}
+				value={email}
+			/>
+
+			<Text>Password:</Text>
+			<TextInput
+				style={styles.loginform}
+				onChangeText={onChangeText_password}
+				value={login_password}
+			/>
+
+			<Text></Text>
+			<Button
+				style={styles.loginformbtn}
+				title="Login"
+				onPress={() => signIn()}
+			></Button>
+		</View>
+	);
+};
+
+const UsernameContext = React.createContext("");
+
+const App = () => {
+	const [username, setUsername] = React.useState("");
+	console.log(username, "username");
+
+	return (
+		<UsernameContext.Provider value={{ username, setUsername }}>
+			<NavigationContainer>
+				<Stack.Navigator screenOptions={{ headerShown: false }}>
+					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="SignupForm" component={SignupForm} />
+					<Stack.Screen name="Home" component={Home} />
+					<Stack.Screen name="Services" component={Services} />
+					<Stack.Screen name="Profile" component={Profile} />
+					<Stack.Screen name="LoginForm" component={LoginForm} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</UsernameContext.Provider>
 	);
 };
 

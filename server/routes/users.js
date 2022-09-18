@@ -31,10 +31,10 @@ const bcrypt = require('bcrypt');
 
 router.post('/signup', (req, res) => {
     let { username, email, password, role } = req.body;
-    username = username.trim();
-    email = email.trim();
-    password = password.trim();
-    role = role.trim();
+    username = username?.trim();
+    email = email?.trim();
+    password = password?.trim();
+    role = role?.trim();
 
     console.log("gi");
     console.log(username, "user");
@@ -48,7 +48,7 @@ router.post('/signup', (req, res) => {
             status: "FAILED",
             message: "Invalid name entered"
         })
-    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
         res.json({
             status: "FAILED",
             message: "Invalid email entered"
@@ -67,34 +67,29 @@ router.post('/signup', (req, res) => {
                 // password handler 
                 const saltRounds = 10;
                 console.log(password, "password");
-                bcrypt.hash(password, saltRounds).then(hashedPassword => {
-                    const newUser = new User({
-                        username,
-                        email,
-                        password: hashedPassword,
-                        role
-                    });
-                    console.log("new user");
-                    newUser.save().then(result => {
-                        res.json({
-                            status: "SUCCESS",
-                            message: "Sign up successful",
-                            data: result,
-                        })
+                console.log('userinfo', username, email, password, role)
+                const newUser = new User({
+                    username,
+                    email,
+                    password,
+                    role
+                });
+                console.log("new user");
+                newUser.save().then(result => {
+                    res.json({
+                        status: "SUCCESS",
+                        message: "Sign up successful",
+                        data: result,
                     })
-                        .catch(err => {
-                            res.json({
-                                status: "FAILED",
-                                message: "Error occured while saving user account"
-                            })
-                        })
                 })
                     .catch(err => {
+                        console.log(err)
                         res.json({
                             status: "FAILED",
-                            message: "Error occured while hashing password!"
+                            message: "Error occured while saving user account"
                         })
                     })
+
             }
         }).catch(err => {
             console.log(err);
@@ -113,6 +108,8 @@ router.post('/signin', (req, res) => {
     email = email.trim();
     password = password.trim();
 
+    console.log("hi");
+
     if (email == '' || password == "") {
         res.json({
             status: "Failed",
@@ -125,8 +122,8 @@ router.post('/signin', (req, res) => {
                 //user exists
                 if (data) {
                     const hashedPassword = data[0].password;
-                    bcrypt.compare(password, hashedPassword).then(result => {
-                        if (result) {
+                    // bcrypt.compare(password, hashedPassword).then(result => {
+                        if (password ==hashedPassword) {
                             //password match
                             res.json({
                                 status: "SUCESS",
@@ -139,16 +136,16 @@ router.post('/signin', (req, res) => {
                                 message: "invalid password entered"
                             })
                         }
-                    })
-                        .catch(err => {
-                            res.json({
-                                status: "FAILED",
-                                message: "An error occured while comparing passwords"
-                            })
-                        })
+                    // })
+                        // .catch(err => {
+                        //     res.json({
+                        //         status: "FAILED",
+                        //         message: "An error occured while comparing passwords"
+                        //     })
+                        // })
                 } else {
                     res.json({
-                        status:"failed",
+                        status: "failed",
                         message: "invald credentials"
                     })
                 }
@@ -156,10 +153,10 @@ router.post('/signin', (req, res) => {
             .catch(err => {
                 res.json({
                     status: "FAILED",
-                    message:"an error occured while checking for existing user"
+                    message: "an error occured while checking for existing user"
                 })
             })
-        }
-    })
+    }
+})
 
 module.exports = router;

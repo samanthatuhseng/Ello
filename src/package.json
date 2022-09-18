@@ -20,10 +20,12 @@
     "nodemon": "^2.0.20",
     "react": "18.0.0",
     "react-native": "0.69.5",
+    "react-native-paper": "^5.0.0-rc.5",
     "tedious": "^15.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@expo/ngrok": "^4.1.0"
   },
   "private": true,
   "description": "",
