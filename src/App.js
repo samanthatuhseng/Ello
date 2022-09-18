@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 	loginform: {
 		borderColor: "#000",
 		borderWidth: 2,
-		width: "70%",
+		width: 300,
 		borderRadius: 60,
 		paddingLeft: 10,
 	},
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
 		borderRadius: 50,
 		width: 80,
 		height: 80,
+		marginLeft: 110
 	},
 	title: {
 		fontSize: 28,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
 		height: 200,
 		width: "90%",
 		backgroundColor: "#DDE3FD",
-		opacity: "30%",
+		// opacity: "30%",
 		borderTopRightRadius: 15,
 		borderTopLeftRadius: 15,
 		borderBottomLeftRadius: 15,
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
 	},
 	lightOrange: {
 		backgroundColor: "#FFD7C2",
-		opacity: "50%",
+		// opacity: "50%",
 		marginTop: 20,
 		marginBottom: 20,
 	},
@@ -338,7 +339,6 @@ const Home = ({ navigation }) => {
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navbutton}
-          activeOpacity={0.5}
           onPress={() => navigation.navigate("Home")}
         >
           <Image source={require("./assets/navicons/homeicon.png")} />
@@ -348,7 +348,6 @@ const Home = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.navbutton}
-          activeOpacity={0.5}
           onPress={() => navigation.navigate("TaskForm")}
         >
           <View style={styles.circle}>
@@ -362,7 +361,6 @@ const Home = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.navbutton}
-          activeOpacity={0.5}
           onPress={() => navigation.navigate("Profile")}
         >
           <Image source={require("./assets/navicons/usericon.png")} />
@@ -381,8 +379,7 @@ const Services = ({ navigation }) => {
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navbutton}
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Home")}
+		  onPress={() => navigation.navigate("Home")}
         >
           <Image source={require("./assets/navicons/homeicon.png")} />
           <View style={styles.SeparatorLine} />
@@ -391,7 +388,6 @@ const Services = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.navbutton}
-          activeOpacity={0.5}
           onPress={() => navigation.navigate("Services")}
         >
           <View style={styles.circle}>
@@ -405,7 +401,6 @@ const Services = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.navbutton}
-          activeOpacity={0.5}
           onPress={() => navigation.navigate("Profile")}
         >
           <Image source={require("./assets/navicons/usericon.png")} />
@@ -416,119 +411,6 @@ const Services = ({ navigation }) => {
       <StatusBar style="auto" />
     </View>
   );
-};
-
-const Profile = ({ navigation }) => {
-  const [profile_first_name, pchange_first_name] = React.useState("");
-  const [profile_last_name, pchange_last_name] = React.useState("");
-  const [profile_email, pchange_email] = React.useState("");
-  const [profile_address, pchange_address] = React.useState("");
-  const [profile_dob, pchange_dob] = React.useState("");
-  const [profile_ec, pchange_ec] = React.useState("");
-  const [profile_ecn, pchange_ecn] = React.useState("");
-
-  return (
-    <View style={styles.profilecontainer}>
-      {/* Profile Forms */}
-      <View>
-        <Text>Profile</Text>
-        <Image
-          style={styles.profile_picture}
-          source={require("./assets/favicon.png")}
-        />
-
-        {/* Forms below */}
-        <Text>First Name:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_first_name}
-          value={profile_first_name}
-        />
-
-        <Text>Last Name:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_last_name}
-          value={profile_last_name}
-        />
-
-        <Text>Email Address:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_email}
-          value={profile_email}
-        />
-
-        <Text>Home Address:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_address}
-          value={profile_address}
-        />
-
-        <Text>Date Of Birth:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_dob}
-          value={profile_dob}
-        />
-
-        <Text>Emergency Contact:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_ec}
-          value={profile_ec}
-        />
-
-        <Text>Emergency Contact Number:</Text>
-        <TextInput
-          style={styles.loginform}
-          onChangeText={pchange_ecn}
-          value={profile_ecn}
-        />
-
-        {/* Forms above ^^^ */}
-      </View>
-      {/* Profile Forms */}
-
-      <View style={styles.navbar}>
-        <TouchableOpacity
-          style={styles.navbutton}
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Image source={require("./assets/navicons/homeicon.png")} />
-          <View style={styles.SeparatorLine} />
-          <Text style={styles.TextStyle}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navbutton}
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Services")}
-        >
-          <View style={styles.circle}>
-            <Image
-              source={require("./assets/navicons/requesticon.png")}
-            />
-          </View>
-          <View style={styles.SeparatorLine} />
-          <Text style={styles.TextStyle}>Request Services</Text>
-        </TouchableOpacity>
-
-				<TouchableOpacity
-					style={styles.navbutton + "opacity: 0.2"}
-					activeOpacity={0.5}
-					onPress={() => navigation.navigate("Profile")}
-				>
-					<Image source={require("./assets/navicons/usericon.png")} />
-					<View style={styles.SeparatorLine} />
-					<Text style={styles.TextStyle}>Profile</Text>
-				</TouchableOpacity>
-			</View>
-			<StatusBar style="auto" />
-		</View>
-	);
 };
 
 const Profile = ({ navigation }) => {
