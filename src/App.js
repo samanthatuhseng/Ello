@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     // height: 100
     justifyContent: 'space-between',
     flexDirection: 'row',
+    padding: 20,
   },
   navbutton: {
     backgroundColor: 'white',
@@ -63,9 +64,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     display: 'flex',
-    padding: 20,
     paddingTop: 80,
-    alignItems: 'center'
+    alignItems: 'center',
+
   },
   profile_picture: {
     borderColor: "#000",
@@ -73,6 +74,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 80,
     height: 80
+  },
+  profileform: {
+    width: 100,
+    borderColor: "#000",
+    borderWidth: 2,
+    borderRadius: 60,
+    paddingLeft: 10
   }
 });
  
@@ -108,7 +116,8 @@ const Login = ({ navigation }) => {
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
- 
+
+      <Text>Home</Text>
       <View style={styles.navbar}>
         <TouchableOpacity style={styles.navbutton} activeOpacity={0.5} onPress={() => navigation.navigate('Home')}>
             <Image source={require('./assets/navicons/homeicon.png')}/>
@@ -196,25 +205,25 @@ const Profile = ({ navigation }) => {
 
           {/* Forms below */}
           <Text>First Name:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_first_name} value={profile_first_name}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_first_name} value={profile_first_name}/>
 
           <Text>Last Name:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_last_name} value={profile_last_name}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_last_name} value={profile_last_name}/>
 
           <Text>Email Address:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_email} value={profile_email}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_email} value={profile_email}/>
       
           <Text>Home Address:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_address} value={profile_address}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_address} value={profile_address}/>
       
           <Text>Date Of Birth:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_dob} value={profile_dob}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_dob} value={profile_dob}/>
       
           <Text>Emergency Contact:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_ec} value={profile_ec}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_ec} value={profile_ec}/>
 
           <Text>Emergency Contact Number:</Text>
-          <TextInput style={styles.loginform} onChangeText={pchange_ecn} value={profile_ecn}/>
+          <TextInput style={styles.profileform} onChangeText={pchange_ecn} value={profile_ecn}/>
       
           {/* Forms above ^^^ */}
         </View>
