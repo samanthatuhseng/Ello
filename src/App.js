@@ -388,7 +388,7 @@ const Services = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.navbutton}
-          onPress={() => navigation.navigate("Services")}
+          onPress={() => navigation.navigate("TaskForm")}
         >
           <View style={styles.circle}>
             <Image
@@ -500,7 +500,7 @@ const Profile = ({ navigation }) => {
 
 				<TouchableOpacity
 					style={styles.navbutton}
-					onPress={() => navigation.navigate("Services")}
+					onPress={() => navigation.navigate("TaskForm")}
 				>
 					<View style={styles.circle}>
 						<Image
